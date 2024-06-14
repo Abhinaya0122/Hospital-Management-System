@@ -360,5 +360,5 @@ def delete_patient(patient_id):
     cursor.close()
     return redirect(url_for('patient'))
 
-if __name__ == '__main__':
-    app.run(debug=True)
+# if __name__ == '__main__':
+#     app.run(debug=True)
