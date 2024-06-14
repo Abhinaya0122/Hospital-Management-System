@@ -73,7 +73,7 @@ def authenticate():
         db_connection = get_db_connection()
         try:
             with db_connection.cursor(dictionary=True) as cursor:
-                cursor.execute('SELECT * FROM user WHERE userid = %s AND passwordHash = %s', (id, password))
+                cursor.execute('SELECT * FROM User WHERE userid = %s AND passwordHash = %s', (id, password))
                 user = cursor.fetchone()
                 role = user['Role']
                 if user and role=='patient':
