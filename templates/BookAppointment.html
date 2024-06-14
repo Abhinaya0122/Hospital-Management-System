@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Appointment</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f0f0f0;
+        }
+        form {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            max-width: 400px;
+            width: 100%;
+        }
+        form label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+        }
+        form input, form select {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 16px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        form input[type="submit"] {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        form input[type="submit"]:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <form id="appointmentForm">
+        <label for="PatientID">Patient ID:</label>
+        <input type="text" id="PatientID" name="PatientID" required>
+
+        <label for="DoctorID">Doctor:</label>
+        <select id="DoctorID" name="DoctorID" required>
+            <option value="">Select Doctor</option>
+            <!-- Options will be populated by JavaScript -->
+        </select>
+
+        <label for="AppointmentDate">Appointment Date:</label>
+        <input type="date" id="AppointmentDate" name="AppointmentDate" required>
+
+        <label for="AppointmentTime">Appointment Time:</label>
+        <input type="time" id="AppointmentTime" name="AppointmentTime" required>
+
+        <label for="Reason">Reason:</label>
+        <input type="text" id="Reason" name="Reason" maxlength="255" required>
+
+        <input type="hidden" id="Status" name="Status" value="YET">
+
+        <input type="submit" value="Book Appointment">
+    </form>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            fetch('/get_doctors')
+                .then(response => response.json())
+                .then(data => {
+                    const doctorSelect = document.getElementById('DoctorID');
+                    data.forEach(doctor => {
+                        const option = document.createElement('option');
+                        option.value = doctor.DoctorID;
+                        option.text = `${doctor.Name}`;
+                        console.log(doctor.FirstName);
+                        doctorSelect.add(option);
+                    });
+                });
+        });
+
+        document.getElementById('appointmentForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            const formData = new FormData(this);
+            fetch('/book_appointment', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    alert('Appointment booked successfully');
+                } else {
+                    alert('Error booking appointment');
+                }
+            });
+        });
+    </script>
+</body>
+</html>

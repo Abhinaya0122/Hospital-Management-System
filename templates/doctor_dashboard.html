@@ -1,0 +1,37 @@
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}Hospital Management System{% endblock %}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='doctor.css') }}">
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="/">Home</a></li>
+                <li><a href="/dashboard">Dashboard</a></li>
+                <li><a href="/profile">Profile</a></li>
+                <li><a href="/logout">Logout</a></li>
+            </ul>
+        </nav>
+    </header>
+<section class="dashboard">
+    <h2>Doctor's Dashboard</h2>
+    <div class="appointments">
+        <h3>Upcoming Appointments</h3>
+        <ul>
+            {% for appointment in appointments %}
+            <li>Patient ID: {{ appointment.PatientID }} - Date: {{ appointment.AppointmentDate }} - Time: {{ appointment.AppointmentTime }}</li>
+            {% endfor %}
+        </ul>
+    </div>
+    <div class="patient-history">
+        <h3>Patient History</h3>
+        <p><a href="#">View Patient History</a></p>
+    </div>
+</section>
+<footer>
+    <p>&copy; 2024 Hospital Management System</p>
+</footer>
+</body>
+</html>
+

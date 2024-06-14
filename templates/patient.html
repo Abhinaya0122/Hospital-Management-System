@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Patient Dashboard</title>
+    <style>
+/* Global styles */
+body {
+    font-family: 'Inter', sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* Header styles */
+header {
+    background-color: #ffffff;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    padding: 20px 0;
+}
+
+.logo img {
+    width: 150px;
+}
+
+.navbar {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin-top: 10px;
+}
+
+.navbar a {
+    color: #4A5764;
+    text-decoration: none;
+    font-size: 18px;
+    transition: color 0.3s;
+}
+
+.navbar a:hover {
+    color: #2ec8a6;
+}
+
+.right-icons {
+    display: flex;
+    align-items: center;
+}
+
+#menu-bars {
+    font-size: 20px;
+    background: transparent;
+    border: none;
+    color: #4A5764;
+    cursor: pointer;
+}
+
+.btn {
+    background-color: #2ec8a6;
+    color: #ffffff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    text-decoration: none;
+    font-size: 16px;
+    transition: background-color 0.3s;
+}
+
+.btn:hover {
+    background-color: #25a593;
+}
+
+/* Home section styles */
+.main-home {
+    background-image: url('background.jpg');
+    background-size: cover;
+    padding: 100px 0;
+}
+
+.home {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.card {
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    padding: 40px 20px;
+    margin-bottom: 40px;
+    text-align: center;
+    width: 30%;
+    transition: transform 0.3s ease-in-out;
+}
+
+.card:hover {
+    transform: translateY(-10px);
+}
+
+.card h2 {
+    color: #2ec8a6;
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+.card p {
+    color: #4A5764;
+    font-size: 16px;
+    line-height: 1.6;
+}
+
+.homebtnsec {
+    background-color: #2ec8a6;
+    color: #ffffff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    text-decoration: none;
+    font-size: 16px;
+    transition: background-color 0.3s;
+}
+
+.homebtnsec:hover {
+    background-color: #25a593;
+}
+
+@media (max-width: 768px) {
+    .home .card {
+        width: 100%;
+    }
+}
+
+</style>
+</head>
+<body>
+    
+
+    <div class="main-home">
+        <div class="home">
+            <div class="card medical-records">
+                <h2>Medical Records</h2>
+                <p>View your medical history and records here.</p>
+                <a href="/medical_records" class="homebtnsec">View Records</a>
+            </div>
+            <div class="card billing-info">
+                <h2>Billing Information</h2>
+                <p>Check your billing details and payment status.</p>
+                <a href="/billing_info" class="homebtnsec">View Billing</a>
+            </div>
+            <div class="card upcoming-appointments">
+                <h2>Upcoming Appointments</h2>
+                <p>See your scheduled appointments and upcoming visits.</p>
+                <a href="/upcoming_appointments" class="homebtnsec">View Appointments</a>
+            </div>
+            <div class="card billing-info">
+                <h2>Book Appointment</h2>
+                <p>Book your appointment with you respective doctore.</p>
+                <a href="/bookAppointment" class="homebtnsec">Book Appointment</a>
+            </div>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
