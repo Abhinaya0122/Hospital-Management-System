@@ -8,10 +8,11 @@ import logging
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'xyzabc'
-app.config['MYSQL_HOST'] = 'sql12.freesqldatabase.com'
-app.config['MYSQL_USER'] = 'sql12713958'
-app.config['MYSQL_PASSWORD'] = ' 7jCRmtAaKI'
-app.config['MYSQL_DB'] = 'sql12713958'
+app.config['MYSQL_HOST'] = 'byyw6dxjipn2owgrgz5z-mysql.services.clever-cloud.com'
+app.config['MYSQL_USER'] = 'uqhbjgzshwljnej9'
+app.config['MYSQL_PASSWORD'] = '3vNGCjMx5WpoD5g075ZU'
+app.config['MYSQL_DB'] = 'byyw6dxjipn2owgrgz5z'
+app.config['port']=3306
 
 def get_db_connection():
     return mysql.connector.connect(
@@ -19,6 +20,8 @@ def get_db_connection():
         user=app.config['MYSQL_USER'],
         password=app.config['MYSQL_PASSWORD'],
         database=app.config['MYSQL_DB'],
+        port = app.config['port']
+
     )
 
 def generate_token(username):
