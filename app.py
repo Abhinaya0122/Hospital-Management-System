@@ -19,7 +19,6 @@ def get_db_connection():
         user=app.config['MYSQL_USER'],
         password=app.config['MYSQL_PASSWORD'],
         database=app.config['MYSQL_DB'],
-        port=3306
     )
 
 def generate_token(username):
