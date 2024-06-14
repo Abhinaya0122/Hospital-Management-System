@@ -8,10 +8,10 @@ import logging
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'xyzabc'
-app.config['MYSQL_HOST'] = 'localhost'
-app.config['MYSQL_USER'] = 'root'
-app.config['MYSQL_PASSWORD'] = 'Abhinaya@2004'
-app.config['MYSQL_DB'] = 'hospital'
+app.config['MYSQL_HOST'] = 'sql12.freesqldatabase.com'
+app.config['MYSQL_USER'] = 'sql12713958'
+app.config['MYSQL_PASSWORD'] = ' 7jCRmtAaKI'
+app.config['MYSQL_DB'] = 'sql12713958'
 
 def get_db_connection():
     return mysql.connector.connect(
