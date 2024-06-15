@@ -139,7 +139,7 @@ def medical_records():
             # Fetch user ID from JWT token
             user_id = request.username  # Assuming you set this in jwt_token_required decorator
 
-            query = "SELECT * FROM Medicalrecord WHERE PatientID = %s"
+            query = "SELECT * FROM MedicalRecord WHERE PatientID = %s"
             cursor.execute(query, (user_id,))
             records = cursor.fetchall()
             print(records)  # For debugging purposes
