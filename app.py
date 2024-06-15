@@ -208,7 +208,7 @@ def book_appointment():
 def get_doctors():
     db= get_db_connection()
     cursor = db.cursor(dictionary=True)
-    cursor.execute("SELECT DoctorID, Name FROM doctor")
+    cursor.execute("SELECT DoctorID, Name FROM Doctor")
     doctors = cursor.fetchall()
     print(doctors)
     cursor.close()
