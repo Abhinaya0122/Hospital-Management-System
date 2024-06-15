@@ -113,7 +113,7 @@ def Ddashboard():
             # Fetch user ID from JWT token
             user_id = request.username  # Assuming you set this in jwt_token_required decorator
 
-            cursor.execute('SELECT Name FROM doctor WHERE DoctorID = %s', (user_id,))
+            cursor.execute('SELECT Name FROM Doctor WHERE DoctorID = %s', (user_id,))
             name = cursor.fetchone()
 
     except Error as e:
@@ -139,7 +139,7 @@ def medical_records():
             # Fetch user ID from JWT token
             user_id = request.username  # Assuming you set this in jwt_token_required decorator
 
-            query = "SELECT * FROM medicalrecord WHERE PatientID = %s"
+            query = "SELECT * FROM Medicalrecord WHERE PatientID = %s"
             cursor.execute(query, (user_id,))
             records = cursor.fetchall()
             print(records)  # For debugging purposes
@@ -162,7 +162,7 @@ def billing_info():
             # Fetch user ID from JWT token
             user_id = request.username  # Assuming you set this in jwt_token_required decorator
 
-            query = "SELECT * FROM billing where PatientID = %s"
+            query = "SELECT * FROM Billing where PatientID = %s"
             cursor.execute(query, (user_id,))
             res = cursor.fetchall()
             print(res)  # For debugging purposes
@@ -185,7 +185,7 @@ def upcoming_appointments():
             # Fetch user ID from JWT token
             user_id = request.username  # Assuming you set this in jwt_token_required decorator
 
-            query = "SELECT * FROM appointment where PatientID = %s"
+            query = "SELECT * FROM Appointment where PatientID = %s"
             cursor.execute(query, (user_id,))
             res = cursor.fetchall()
             print(res)  # For debugging purposes
@@ -230,7 +230,7 @@ def book_appointment_post():
         reason = data['Reason']
         
         query = """
-        INSERT INTO appointment (PatientID, DoctorID, AppointmentDate, AppointmentTime, Reason)
+        INSERT INTO Appointment (PatientID, DoctorID, AppointmentDate, AppointmentTime, Reason)
         VALUES (%s, %s, %s, %s, %s)
         """
         
@@ -254,7 +254,7 @@ def book_appointment_post():
 def DocAppointment():
     db= get_db_connection()
     cursor = db.cursor(dictionary=True)
-    query = "SELECT * FROM appointment where PatientID = %s"
+    query = "SELECT * FROM Appointment where PatientID = %s"
     cursor.execute(query,(id,))
     res=cursor.fetchall()
     cursor.close()
@@ -265,7 +265,7 @@ def get():
     db= get_db_connection()
     user_id = request.username
     cursor = db.cursor(dictionary=True)
-    cursor.execute('''SELECT * FROM appointment WHERE DoctorID = %s AND  CONCAT(AppointmentDate, ' ', AppointmentTime) >= NOW()
+    cursor.execute('''SELECT * FROM Appointment WHERE DoctorID = %s AND  CONCAT(AppointmentDate, ' ', AppointmentTime) >= NOW()
                             ORDER BY AppointmentDate, AppointmentTime                      ''', (user_id,))
     res = cursor.fetchall()
     return res
@@ -285,13 +285,13 @@ def delete_appointment(appointment_id):
         db_connection = get_db_connection()
         with db_connection.cursor(dictionary=True) as cursor:
             # Check if appointment exists
-            cursor.execute('SELECT * FROM appointment WHERE AppointmentID = %s', (appointment_id,))
+            cursor.execute('SELECT * FROM Appointment WHERE AppointmentID = %s', (appointment_id,))
             appointment = cursor.fetchone()
             if not appointment:
                 return jsonify({'error': 'Appointment not found'}), 404
             
             # Delete appointment from database
-            cursor.execute('DELETE FROM appointment WHERE AppointmentID = %s', (appointment_id,))
+            cursor.execute('DELETE FROM Appointment WHERE AppointmentID = %s', (appointment_id,))
             db_connection.commit()
             return jsonify({'message': 'Appointment deleted successfully'})
     except Error as e:
@@ -307,7 +307,7 @@ def delete_appointment(appointment_id):
 def appointmentManagement():
     db= get_db_connection()
     cursor = db.cursor(dictionary=True)
-    query = "SELECT * FROM appointment"
+    query = "SELECT * FROM Appointment"
     cursor.execute(query)
     res=cursor.fetchall()
     print(res)
@@ -324,7 +324,7 @@ def appointmentscheduling():
 def patients():
     db = get_db_connection()
     cursor = db.cursor(dictionary=True)
-    cursor.execute("SELECT * FROM patient")
+    cursor.execute("SELECT * FROM Patient")
     patients = cursor.fetchall()
     cursor.close()
     return render_template('patient-management.html', patients=patients)
@@ -334,7 +334,7 @@ def patients():
 def edit_patient(patient_id):
     db = get_db_connection()
     cursor = db.cursor(dictionary=True)
-    cursor.execute('SELECT * FROM patient WHERE PatientID = %s', (patient_id,))
+    cursor.execute('SELECT * FROM Patient WHERE PatientID = %s', (patient_id,))
     patient = cursor.fetchone()
     if request.method == 'POST':
         name = request.form['name']
@@ -358,7 +358,7 @@ def edit_patient(patient_id):
 def delete_patient(patient_id):
     db = get_db_connection()
     cursor = db.cursor()
-    cursor.execute('DELETE FROM patient WHERE PatientID = %s', (patient_id,))
+    cursor.execute('DELETE FROM Patient WHERE PatientID = %s', (patient_id,))
     db.commit()
     cursor.close()
     return redirect(url_for('patient'))
